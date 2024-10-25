@@ -1,8 +1,15 @@
 // Basic Express server
 const express = require('express'); // Use the express module
 const path = require('path'); // Use the path module
+const bodyParser = require('body-parser'); // Use body-parse
 const app = express(); // Creates an Express application
 const port = 3000; // Port
+
+// Middleware to serve all static files (CSS, JS, etc.)
+app.use(express.static('public'));
+
+// body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes HTTP GET requests to the specified path and
 // returns a list of movie objects in JSON format
@@ -59,5 +66,10 @@ app.get('/name', (req, res) => {
     res.send(`Hello ${firstname} ${lastname}`);
 });
 
-// Middleware to serve all static files (CSS, JS, etc.)
-app.use(express.static('public'));
+// Routes HTTP POST requests to the specified path and
+// returns welcome message with first and last names passed to html form
+app.post('/name', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});

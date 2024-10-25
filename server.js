@@ -1,5 +1,6 @@
 // Basic Express server
-const express = require('express'); // Use the express pkg
+const express = require('express'); // Use the express module
+const path = require('path'); // Use the path module
 const app = express(); // Creates an Express application
 const port = 3000; // Port
 
@@ -30,8 +31,7 @@ app.get('/api/movies', (req, res) => {
             "Poster": "https://example.com/poster3.jpg"
         }
     ];
-    //res.json({ movies });
-    res.status(200).json({ myMovies:movies });
+    res.status(200).json({ myMovies: movies }); // Returnes the movies as a JSON response
 });
 
 // Binds and listens for connections on the specified host and port
@@ -44,3 +44,12 @@ app.use((err, req, res, next) => {
     console.error(err.stack); // Log error to the console
     res.status(500).send('Something went wrong!'); // Sets the HTTP status for the response
 });
+
+// Routes HTTP GET requests to the specified path and
+// returns a static html page
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Middleware to serve all static files (CSS, JS, etc.)
+app.use(express.static('public'));

@@ -5,8 +5,10 @@ const port = 3000; // Port
 
 // Routes HTTP GET requests to the specified path and
 // outputs the welcome message
-app.get('/', (req, res) => {
-    res.send('Welcome to Data Representation & Querying'); // Welcome message
+app.get('/hello/:name/:surname', (req, res) => {
+    const name = req.params.name; // Stores name passed through the URL
+    const surname = req.params.surname; // Stores surname passed through the URL
+    res.send(`Hello ${name} ${surname}`); // Output the message
 });
 
 // Binds and listens for connections on the specified host and port

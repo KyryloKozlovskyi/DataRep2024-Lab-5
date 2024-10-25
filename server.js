@@ -51,5 +51,13 @@ app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Routes HTTP GET requests to the specified path and
+// returns welcome message with first and last names passed to html form
+app.get('/name', (req, res) => {
+    const firstname = req.query.firstname;
+    const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
 // Middleware to serve all static files (CSS, JS, etc.)
 app.use(express.static('public'));

@@ -4,11 +4,34 @@ const app = express(); // Creates an Express application
 const port = 3000; // Port
 
 // Routes HTTP GET requests to the specified path and
-// outputs the welcome message
-app.get('/hello/:name/:surname', (req, res) => {
-    const name = req.params.name; // Stores name passed through the URL
-    const surname = req.params.surname; // Stores surname passed through the URL
-    res.send(`Hello ${name} ${surname}`); // Output the message
+// returns a list of movie objects in JSON format
+app.get('/api/movies', (req, res) => {
+    // JSON of movie objects
+    const movies = [
+        {
+            "Title": "Avengers: Infinity War",
+            "Year": "2018",
+            "imdbID": "tt4154756",
+            "Type": "movie",
+            "Poster": "https://example.com/poster1.jpg"
+        },
+        {
+            "Title": "Captain America: Civil War",
+            "Year": "2016",
+            "imdbID": "tt3498820",
+            "Type": "movie",
+            "Poster": "https://example.com/poster2.jpg"
+        },
+        {
+            "Title": "World War Z",
+            "Year": "2013",
+            "imdbID": "tt0816711",
+            "Type": "movie",
+            "Poster": "https://example.com/poster3.jpg"
+        }
+    ];
+    //res.json({ movies });
+    res.status(200).json({ myMovies:movies });
 });
 
 // Binds and listens for connections on the specified host and port
